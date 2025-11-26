@@ -1,0 +1,27 @@
+<launch>
+    <arg name="api_base" default="https://api.chatanywhere.org/v1" />
+    <arg name="api_path" default="/chat/completions" />
+    <arg name="api_key" default="sk-r3fZzDuer3u6hKS42ht51TAqzsv1br3bYUTupsWySko2fdSz" />
+    <arg name="model" default="gpt-3.5-turbo" />
+    <arg name="cmd_vel_topic" default="/cmd_vel" />
+    <arg name="instruction_topic" default="/llm_motion/instruction" />
+
+    <node pkg="llm_motion_bridge" type="llm_motion_bridge.py" name="llm_motion_bridge" output="screen">
+    <param name="api_base" value="$(arg api_base)" />
+    <param name="api_path" value="$(arg api_path)" />
+        <param name="api_key" value="$(arg api_key)" />
+        <param name="model" value="$(arg model)" />
+        <param name="cmd_vel_topic" value="$(arg cmd_vel_topic)" />
+        <param name="instruction_topic" value="$(arg instruction_topic)" />
+
+        <param name="max_linear_speed" value="10" />
+        <param name="max_side_speed" value="10" />
+        <param name="max_angular_speed" value="10" />
+        
+        <param name="allow_y_motion" value="true" />
+        <param name="publish_rate" value="5.0" />
+        <param name="command_hold_duration" value="10" />
+        <param name="temperature" value="0.1" />
+        <param name="response_format" value="json_object" />
+    </node>
+</launch>
